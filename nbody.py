@@ -71,12 +71,12 @@ SYSTEM = tuple(BODIES.values())
 PAIRS = tuple(combinations(SYSTEM))
 
 
-# breakpoint()
 
 def advance(dt, n, bodies=SYSTEM, pairs=PAIRS):
-    # with open("body_position.csv", 'a+', newline="") as f:
-    #     writer = csv.writer(f)
-    #     writer.writerow(["name of the body", "position x", "position y", "position z"])
+   # uncomment following lines to create csv file
+    '''with open("body_position.csv", 'a+', newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["name of the body", "position x", "position y", "position z"])'''
 
         for i in range(n):
             # body_list = ['sun', 'jupiter', 'saturn', 'uranus', 'neptune']
@@ -100,12 +100,13 @@ def advance(dt, n, bodies=SYSTEM, pairs=PAIRS):
                 r[0] += dt * vx
                 r[1] += dt * vy
                 r[2] += dt * vz
-                # current_body = body_list[i]
-                # data = [current_body, r[0], r[1], r[2]]
-                # writer.writerow(data)
-                # i = i + 1
-                # if i > 4:
-                #     i = 0
+
+            '''current_body = body_list[i]
+                data = [current_body, r[0], r[1], r[2]]
+                writer.writerow(data)
+                i = i + 1
+                if i > 4:
+                    i = 0'''
 
 
 def report_energy(bodies=SYSTEM, pairs=PAIRS, e=0.0):

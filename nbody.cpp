@@ -251,23 +251,28 @@ int main(int argc, char **argv) {
         const unsigned int n = atoi(argv[1]);
         clock_t start_time, end_time;
         start_time = clock();
-//        const unsigned int n = 5000;
+
         offset_momentum(state);
         std::cout << energy(state) << std::endl;
 
-//        std::ofstream outFile;
-//        outFile.open("body_position_cpp_500000.csv", std::ios::out);
-//        outFile << "name of the body" << "," << "position x" << "," <<
-//        "position y" << "," << "position z" << std::endl;
-//
+ // uncomment following lines to create csv file
+ /*
+        std::ofstream outFile;
+        outFile.open("body_position_cpp_500000.csv", std::ios::out);
+        outFile << "name of the body" << "," << "position x" << "," <<
+        "position y" << "," << "position z" << std::endl;
+*/
         for (int i = 0; i < n; ++i) {
             advance(state, 0.01);
         }
-//            for (int j = 0; j < BODIES_COUNT; ++j) {
-//                outFile << state[j].name << "," << state[j].position.x << "," <<
-//                state[j].position.y << "," << state[j].position.z << std::endl;
-//            }
-//
+
+ // uncomment following lines to create csv file
+/*
+            for (int j = 0; j < BODIES_COUNT; ++j) {
+                outFile << state[j].name << "," << state[j].position.x << "," <<
+                state[j].position.y << "," << state[j].position.z << std::endl;
+            }
+*/
         std::cout << energy(state) << std::endl;
         end_time = clock();
         double duration;
