@@ -14,6 +14,8 @@
 #define _USE_MATH_DEFINES // https://docs.microsoft.com/en-us/cpp/c-runtime-library/math-constants?view=msvc-160
 #include <cmath>
 #include <iostream>
+#include <time.h>
+#include <fstream>
 
 
 // these values are constant and not allowed to be changed
@@ -240,20 +242,38 @@ body state[] = {
 
 
 int main(int argc, char **argv) {
-//    if (argc != 2) {
-//        std::cout << "This is " << argv[0] << std::endl;
-//        std::cout << "Call this program with an integer as program argument" << std::endl;
-//        std::cout << "(to set the number of iterations for the n-body simulation)." << std::endl;
-//        return EXIT_FAILURE;
-//    } else {
-//        const unsigned int n = atoi(argv[1]);
-        const unsigned int n = 1000;
+    if (argc != 2) {
+        std::cout << "This is " << argv[0] << std::endl;
+        std::cout << "Call this program with an integer as program argument" << std::endl;
+        std::cout << "(to set the number of iterations for the n-body simulation)." << std::endl;
+        return EXIT_FAILURE;
+    } else {
+        const unsigned int n = atoi(argv[1]);
+        clock_t start_time, end_time;
+        start_time = clock();
+//        const unsigned int n = 5000;
         offset_momentum(state);
         std::cout << energy(state) << std::endl;
+
+//        std::ofstream outFile;
+//        outFile.open("body_position_cpp_500000.csv", std::ios::out);
+//        outFile << "name of the body" << "," << "position x" << "," <<
+//        "position y" << "," << "position z" << std::endl;
+//
         for (int i = 0; i < n; ++i) {
             advance(state, 0.01);
         }
+//            for (int j = 0; j < BODIES_COUNT; ++j) {
+//                outFile << state[j].name << "," << state[j].position.x << "," <<
+//                state[j].position.y << "," << state[j].position.z << std::endl;
+//            }
+//
         std::cout << energy(state) << std::endl;
+        end_time = clock();
+        double duration;
+        duration = double(end_time - start_time) / (CLOCKS_PER_SEC);
+        std::cout << duration << std::endl;
         return EXIT_SUCCESS;
 
+    }
 }
